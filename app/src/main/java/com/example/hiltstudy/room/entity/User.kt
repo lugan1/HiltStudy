@@ -9,10 +9,12 @@ import androidx.room.PrimaryKey
 data class User(
     val name: String,
 
-    @Embedded
-    val address: Address?
+    @Embedded(prefix = "home_")
+    val homeAddress: Address?,
+
+    @Embedded(prefix = "work_")
+    val workAddress: Address?
 ) {
     @PrimaryKey(autoGenerate = true)
-    @ColumnInfo(name = "user_id")
     var id: Long = 0
 }

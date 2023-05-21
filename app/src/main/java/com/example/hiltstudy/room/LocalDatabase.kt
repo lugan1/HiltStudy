@@ -6,14 +6,19 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.sqlite.db.SupportSQLiteDatabase
+import com.example.hiltstudy.room.dao.LibraryDao
+import com.example.hiltstudy.room.dao.UserAndLibraryDao
 import com.example.hiltstudy.room.dao.UserDao
+import com.example.hiltstudy.room.entity.Library
 import com.example.hiltstudy.room.entity.User
 
 //version: 데이터베이스 스키마가 변경,수정 될때마다 올려야된다.
 //entities: 사용된 entity 클래스들을 작성한다.
-@Database(version = 1, entities = [User::class])
+@Database(version = 1, entities = [User::class, Library::class])
 abstract class LocalDatabase : RoomDatabase() {
     abstract fun userDao(): UserDao
+    abstract fun libraryDao(): LibraryDao
+    abstract fun userAndLibraryDao(): UserAndLibraryDao
 
     //데이터베이스는 생성시 많은 비용이 발생하므로 앱 전역에서 사용할 수 있는 싱글톤 패턴으로 생성한다.
     companion object {
