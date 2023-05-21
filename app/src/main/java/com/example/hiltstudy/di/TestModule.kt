@@ -1,4 +1,4 @@
-package com.example.hiltstudy.Di
+package com.example.hiltstudy.di
 
 import dagger.Module
 import dagger.Provides

@@ -1,12 +1,16 @@
-package com.example.hiltstudy.Room
+package com.example.hiltstudy.room.entity
 
 import androidx.room.ColumnInfo
+import androidx.room.Embedded
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity(tableName = "user")
-data class UserEntity(
-    val name: String
+data class User(
+    val name: String,
+
+    @Embedded
+    val address: Address?
 ) {
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "user_id")

@@ -1,10 +1,10 @@
-package com.example.hiltstudy.WorkManager
+package com.example.hiltstudy.workManager
 
 import android.content.Context
 import androidx.hilt.work.HiltWorker
 import androidx.work.Worker
 import androidx.work.WorkerParameters
-import com.example.hiltstudy.Di.TestDependency
+import com.example.hiltstudy.di.TestDependency
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedInject
 

@@ -1,19 +1,14 @@
 package com.example.hiltstudy
 
 import android.os.Bundle
-import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.navigateUp
-import androidx.navigation.ui.setupActionBarWithNavController
-import android.view.Menu
-import android.view.MenuItem
 import androidx.work.ExistingWorkPolicy
 import androidx.work.OneTimeWorkRequest
 import androidx.work.WorkManager
-import com.example.hiltstudy.WorkManager.TestWorker
+import com.example.hiltstudy.workManager.TestWorker
 import com.example.hiltstudy.databinding.ActivityMainBinding
+import com.example.hiltstudy.room.LocalDatabase
+import com.example.hiltstudy.workManager.DatabaseWorker
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -27,7 +22,7 @@ class MainActivity : AppCompatActivity() {
 
         binding.testButton.setOnClickListener {
             WorkManager.getInstance(this)
-                .beginUniqueWork("TEST", ExistingWorkPolicy.KEEP, OneTimeWorkRequest.Companion.from(TestWorker::class.java))
+                .beginUniqueWork("TEST", ExistingWorkPolicy.KEEP, OneTimeWorkRequest.Companion.from(DatabaseWorker::class.java))
                 .enqueue()
         }
     }
