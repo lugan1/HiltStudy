@@ -29,14 +29,7 @@ abstract class LocalDatabase : RoomDatabase() {
             //INSTANCE 가 존재하면 INSTANCE 리턴, 없으면 databaseBuilder 로 DB 생성후 리턴
             return INSTANCE ?: synchronized(this) {
                 val instance = Room.databaseBuilder(context.applicationContext, LocalDatabase::class.java, "room_db")
-                    .fallbackToDestructiveMigration() //데이터 베이스 버전이 변경되면, 마이그레이션을 해야되는데, 마이그레이션 실패시 IllegalException 보다는 DB를 삭제후 재생성한다.
-                    .addCallback(object: Callback() {
-                        override fun onCreate(db: SupportSQLiteDatabase) {
-                            super.onCreate(db)
-                            //데이터베이스 생성시의 작업 (미리 데이터를 insert 등)
-                            Log.d("ROOMTEST", "데이터베이스 생성")
-                        }
-                    })
+                    .fallbackToDestructiveMigration() //데이터 베이스 버전(스키마)가 변경되면, 마이그레이션을 해야되는데, 마이그레이션 실패시 IllegalException 보다는 DB를 삭제후 재생성한다.
                     .build()
 
                 INSTANCE = instance

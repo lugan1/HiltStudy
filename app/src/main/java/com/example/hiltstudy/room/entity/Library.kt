@@ -13,9 +13,11 @@ import androidx.room.PrimaryKey
             onDelete = ForeignKey.CASCADE)
     ])
 data class Library(
-    @ColumnInfo(name = "user_id")
-    var userId: Long
+    val name: String
 ) {
     @PrimaryKey(autoGenerate = true)
     var id: Long = 0
+
+    @ColumnInfo(name = "user_id")
+    var userId: Long? = null
 }

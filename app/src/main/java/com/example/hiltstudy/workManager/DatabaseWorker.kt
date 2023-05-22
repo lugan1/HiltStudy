@@ -33,18 +33,26 @@ class DatabaseWorker @AssistedInject constructor(
         Log.d("ROOMTEST", "테스트 시작")
 
         GlobalScope.launch(Dispatchers.IO) {
-            val homeAddress = Address(street = "송파구", state = "B01호", city = "서울", postCode = 103)
-            val workAddress = Address(street = "강남구", state = "301호", city = "서울", postCode = 1001)
-            val user = User("leehoogy", homeAddress, workAddress)
-
-            val library = Library(0)
-            userAndLibraryDao.insertUserAndLibrary(user, library)
-
-            val userAndLibrary:List<UserAndLibrary> = userAndLibraryDao.getUsersAndLibraries()
-
-            userAndLibrary.forEach { Log.d("ROOMTEST", it.toString()) }
         }
 
         return Result.success()
+    }
+
+    suspend fun test() {
+        val homeAddress = Address(street = "송파구", state = "B01호", city = "서울", postCode = 103)
+        val workAddress = Address(street = "강남구", state = "301호", city = "서울", postCode = 1001)
+        val user = User("leehoogy", homeAddress, workAddress)
+
+        val library = Library("music")
+        userAndLibraryDao.insertUserAndLibrary(user, library)
+
+        val userAndLibrary:List<UserAndLibrary> = userAndLibraryDao.getUsersAndLibraries()
+    }
+
+    suspend fun test2() {
+        val library = Library("music")
+        val userAndLibrary = userAndLibraryDao.getUsersAndLibraries().first()
+        userAndLibrary.library = library
+        userAndLibraryDao.insert(userAndLibrary)
     }
 }

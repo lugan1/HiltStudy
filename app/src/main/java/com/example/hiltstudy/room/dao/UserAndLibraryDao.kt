@@ -21,6 +21,13 @@ interface UserAndLibraryDao {
     fun insert(library: Library) : Long
 
     @Transaction
+    fun insert(userAndLibrary: UserAndLibrary) {
+        val userId = userAndLibrary.user.id
+        userAndLibrary.library.userId = userId
+        insert(userAndLibrary.library)
+    }
+
+    @Transaction
     fun insertUserAndLibrary(user: User, library: Library) {
         library.userId = insert(user)
         insert(library)
